@@ -881,12 +881,15 @@
 										<div class="elementor-element elementor-element-e97cdd1 elementor-widget elementor-widget-image"
 											data-id="e97cdd1" data-element_type="widget"
 											data-widget_type="image.default">
-											<div class="elementor-widget-container">
-												<a href="index.html">
-													<img fetchpriority="high" width="1600" height="1600"
-														src="wp-content/uploads/2024/08/logo.png"
-														class="attachment-full size-full wp-image-28" alt="" /> </a>
-											</div>
+											<div
+														class="elementor-widget-container">
+														<img width="1600"
+															height="1600"
+															src="wp-content/uploads/2024/08/logo.png"
+															class="attachment-large size-large wp-image-181"
+															alt=""
+															style="height: 70px; width: 68px; object-fit: cover;"	/>
+													</div>
 										</div>
 									</div>
 								</div>
@@ -1105,29 +1108,8 @@
 																															<span
 																																class="elementor-icon-list-text">
 																																<span
-																																	class="ekit_page_list_title_title">Custom
-																																	Tour
+																																	class="ekit_page_list_title_title">Booking
 																																</span>
-																															</span>
-																														</div>
-																													</a>
-																												</div>
-																												<div
-																													class="elementor-icon-list-item   ">
-																													<a class="elementor-repeater-item-6c7ad64 ekit_badge_left"
-																														href="cars-rental-booking/index.html">
-																														<div
-																															class="ekit_page_list_content">
-																															<span
-																																class="elementor-icon-list-icon">
-																																<i aria-hidden="true"
-																																	class="icon icon-car"></i>
-																															</span>
-																															<span
-																																class="elementor-icon-list-text">
-																																<span
-																																	class="ekit_page_list_title_title">Car
-																																	Rental</span>
 																															</span>
 																														</div>
 																													</a>
@@ -1404,17 +1386,20 @@
 							</div>
 							<style>
 								@media only screen and (max-width: 768px) {
-									.overlay-text {
-										font-size: 18px; /* Smaller text on mobile */
-										height: 500;
+									.video-container {
+										padding-bottom: 75% !important; /* Augmenter la hauteur */
+										min-height: 400px; /* Hauteur minimale */
 									}
 								}
-							
-								@media only screen and (max-width: 480px) {
-									.overlay-text {
-										font-size: 16px; /* Even smaller text on very small screens */
+
+								@media only screen and (max-width: 360px) {
+									.video-container {
+										padding-bottom: 90% !important; /* Encore plus haut pour petits écrans */
+										min-height: 450px;
+										min-height: 500px;
 									}
 								}
+
 							</style>
 							
 
