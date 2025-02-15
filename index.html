@@ -1368,46 +1368,110 @@
 		<section
 			class="elementor-section elementor-top-section elementor-element elementor-element-d9b52f4 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
 			data-id="d9b52f4" data-element_type="section">
-			<div class="elementor-container elementor-column-gap-no">
-				<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-a2ca587"
-					data-id="a2ca587" data-element_type="column">
-					<div class="elementor-widget-wrap elementor-element-populated">
-						<div class="elementor-element elementor-element-07dd909 elementor-widget elementor-widget-slider_revolution"
-							data-id="07dd909" data-element_type="widget" data-widget_type="slider_revolution.default">
-
-							<div class="elementor-widget-container"><div class="wp-block-themepunch-revslider">
-								<!-- START YouTube Video Embed -->
-								<p class="rs-p-wp-fix"></p>
-								<div class="video-container" style="position: relative; background: transparent; margin: 0 auto; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-									<iframe width="500px" height="500" src="https://www.youtube.com/embed/XCUCRLC7ot4?si=XArar7gTz6qWiCOt" frameborder="0" allow="accelerometer; autoplay=1; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-									
-								</div>
-								<!-- END YouTube Video Embed -->
-							</div>
-							<style>
-								@media only screen and (max-width: 768px) {
-									.video-container {
-										padding-bottom: 75% !important; /* Augmenter la hauteur */
-										min-height: 400px; /* Hauteur minimale */
-									}
-								}
-
-								@media only screen and (max-width: 360px) {
-									.video-container {
-										padding-bottom: 90% !important; /* Encore plus haut pour petits écrans */
-										min-height: 450px;
-										min-height: 500px;
-									}
-								}
-
-							</style>
-							
-
-							</div>
+			<!-- <div class="elementor-container elementor-column-gap-no"> -->
+				
+				<div id="booking-container">
+					<h1 id="booking-title">PARADIS-HOLIDAY</h1>
+					<p id="booking-subtitle">Book a Driver Now</p>
+					<form action="">
+						<div id="booking-form">
+							<input type="text" id="from-input" placeholder="From: City, Place, Hotel">
+							<input type="text" id="to-input" placeholder="To: City, Place, Hotel">
+							<input type="text" id="to-input" placeholder="Your Name">
+							<input type="email" id="to-input" placeholder="Email">
+							<input type="date" id="departure-date" name="date" placeholder="Departure Date">
+							<input type="date" id="return-date" name="return-date" placeholder="Return Date">
+							<input type="number" name="number" id="to-input" placeholder="How Many People"  min="1">
+							<button id="find-tickets-btn">Book Now</button>
 						</div>
-					</div>
+					</form>
 				</div>
-			</div>
+				<style>
+					/* styles.css */
+					/* General Styles */
+					body {
+						font-family: Arial, sans-serif;
+						text-align: center;
+						color: #333;
+						padding: 0;
+						margin: 0;
+					}
+
+					/* Booking Container */
+					#booking-container {
+						
+						background: url('./wp-content/uploads/2024/08/banner.svg') no-repeat center center/cover;
+						margin-top: 80px;
+						padding: 20px;
+					}
+
+					/* Title & Subtitle */
+					#booking-title {
+						font-size: 32px;
+						font-weight: bold;
+					}
+
+					#booking-subtitle {
+						font-size: 18px;
+						margin-bottom: 20px;
+					}
+
+					/* Booking Form */
+					#booking-form {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						gap: 10px;
+						background: white;
+						padding: 15px;
+						border-radius: 10px;
+						box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+					}
+
+					/* Input Fields */
+					input, select, button {
+						padding: 10px;
+						font-size: 16px;
+						border-radius: 5px;
+						border: 1px solid #ccc;
+					}
+
+					/* Button */
+					#find-tickets-btn {
+						background: #ff6600;
+						color: white;
+						border: none;
+						cursor: pointer;
+						transition: 0.3s;
+					}
+
+					#find-tickets-btn:hover {
+						background: #cc5200;
+					}
+
+					/* === Mobile Responsive Design === */
+					@media screen and (max-width: 768px) {
+						#booking-form {
+							flex-direction: column;
+							gap: 15px;
+							padding: 20px;
+							width: 90%;
+							margin: auto;
+						}
+
+						input, select, button {
+							width: 100%;
+						}
+
+						#find-tickets-btn {
+							font-size: 18px;
+							padding: 12px;
+						}
+					}
+
+
+				</style>
+			<!-- </div> -->
 		</section>
 		<section
 			class="elementor-section elementor-top-section elementor-element elementor-element-f94959a elementor-section-boxed elementor-section-height-default elementor-section-height-default"
