@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                let lat = position.coords.latitude;
+                let lon = position.coords.longitude;
+
+                console.log("Latitude:", lat);
+                console.log("Longitude:", lon);
+
+                // Call the function inside the callback with correct latitude & longitude
+                getPlaceName(lat, lon);
+            },
+            (error) => {
+                console.error("Error getting location:", error.message);
+            }
+        );
+    } else {
+        console.error("Geolocation is not supported by this browser.");
+    }
+
+    function getPlaceName(lat, lon) {
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=30.4859474&lon=-8.8893675`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Place Name:", data.display_name);
+            })
+            .catch(error => console.error("Error:", error));
+    }
+</script>
+
+</body>
+</html>
