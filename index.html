@@ -17,7 +17,7 @@
 		}
 	</style>
 	<link rel="icon" type="image/png" href="wp-content/uploads/2024/08/logo.png">
-
+	<link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
 	<link rel="alternate" type="application/rss+xml" title="BERBER-TAXI &raquo; Feed" href="feed/index.html" />
 	<link rel="alternate" type="application/rss+xml" title="BERBER-TAXI &raquo; Comments Feed"
 		href="comments/feed/index.html" />
@@ -1114,115 +1114,199 @@
 	</div>
 	<div data-elementor-type="wp-page" data-elementor-id="19" class="elementor elementor-19"
 		data-elementor-post-type="page">
-		<section
-			class="elementor-section elementor-top-section elementor-element elementor-element-d9b52f4 elementor-section-full_width elementor-section-height-default elementor-section-height-default"
-			data-id="d9b52f4" data-element_type="section">
-			<!-- <div class="elementor-container elementor-column-gap-no"> -->
-				
-				<div id="booking-container">
-					<h1 id="booking-title">BERBER-TAXI</h1>
-					<p id="booking-subtitle">Book a Driver Now</p>
-					<form action="">
-						<div id="booking-form">
-							<input type="text" id="from-input" placeholder="From: City, Place, Hotel">
-							<input type="text" id="to-input" placeholder="To: City, Place, Hotel">
-							<input type="text" id="to-input" placeholder="Your Name">
-							<input type="text" id="to-input" placeholder="Phone">
-							<input type="date" id="departure-date" name="date" placeholder="Departure Date">
-							<label for="return-date">Return?</label>
-							<input type="date" id="return-date" name="return-date" placeholder="Return Date">
-							<input type="number" name="number" id="to-input" placeholder="How Many People"  min="1">
-							<button id="find-tickets-btn">Book Now</button>
+		<section class="elementor-section elementor-top-section elementor-element elementor-element-d9b52f4 elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="d9b52f4" data-element_type="section">
+			<div id="booking-container">
+				<h1 id="booking-title" class="Chewy">BERBER-TAXI</h1>
+				<p id="booking-subtitle">Book a Driver Now</p>
+				<form action="">
+					<div id="booking-form">
+						<input type="text" id="from-input" placeholder="From: City, Place, Hotel">
+						<input type="text" id="to-input" placeholder="To: City, Place, Hotel">
+						<input type="text" id="name-input" placeholder="Your Name">
+						<input type="text" id="phone-input" placeholder="Phone">
+						<input type="date" id="departure-date" name="date" placeholder="Departure Date">
+						<label for="return-date">Return?</label>
+						<input type="date" id="return-date" name="return-date" placeholder="Return Date">
+						<!-- Passenger Dropdown -->
+						<div class="passenger-select">
+							<input type="text" id="passengerInput" placeholder="How Many People" readonly>
+							<div class="dropdown" id="dropdown">
+								<div class="row">
+									<span>Adultes (16+)</span>
+									<div class="counter">
+										<button type="button" onclick="changeCount('adults', -1)">-</button>
+										<span id="adults-count">2</span>
+										<button type="button" onclick="changeCount('adults', 1)">+</button>
+									</div>
+								</div>
+								<div class="row">
+									<span>Enfants (2-15)</span>
+									<div class="counter">
+										<button type="button" onclick="changeCount('children', -1)">-</button>
+										<span id="children-count">0</span>
+										<button type="button" onclick="changeCount('children', 1)">+</button>
+									</div>
+								</div>
+								<div class="row">
+									<span>Bébés (-2)</span>
+									<div class="counter">
+										<button type="button" onclick="changeCount('babies', -1)">-</button>
+										<span id="babies-count">0</span>
+										<button type="button" onclick="changeCount('babies', 1)">+</button>
+									</div>
+								</div>
+								<button type="button" class="submit-btn" onclick="applySelection()">Appliquer</button>
+							</div>
 						</div>
-					</form>
-				</div>
-				<style>
-					/* styles.css */
-					/* General Styles */
-					body {
-						font-family: Arial, sans-serif;
-						text-align: center;
-						color: #759D2E;
-						padding: 0;
-						margin: 0;
+						<button id="find-tickets-btn" type="submit">Book Now</button>
+					</div>
+				</form>
+			</div>
+		
+			<style>
+				.passenger-select {
+					position: relative;
+					display: inline-block;
+					width: 100%;
+				}
+		
+				#passengerInput {
+					width: 100%;
+					padding: 8px;
+				}
+		
+				.dropdown {
+					display: none; /* Hide dropdown by default */
+					position: absolute;
+					top: 110%;
+					left: 0;
+					background: white;
+					border: 1px solid #ddd;
+					padding: 10px;
+					width: 250px;
+					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+					z-index: 10;
+					border-radius: 5px;
+				}
+		
+				.dropdown.active {
+					display: block; /* Show dropdown when active */
+				}
+		
+				.dropdown .row {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin-bottom: 10px;
+				}
+		
+				.counter {
+					display: flex;
+					align-items: center;
+				}
+		
+				.counter button {
+					background: #FF6600;
+					color: white;
+					border: none;
+					padding: 4px 8px;
+					margin: 0 5px;
+					border-radius: 3px;
+					cursor: pointer;
+				}
+		
+				.counter span {
+					min-width: 20px;
+					text-align: center;
+				}
+		
+				.submit-btn {
+					width: 100%;
+					background: #FF6600;
+					color: white;
+					border: none;
+					padding: 8px;
+					border-radius: 4px;
+					cursor: pointer;
+					font-weight: bold;
+				}
+			</style>
+		
+			<script>
+				const passengerInput = document.getElementById('passengerInput');
+				const dropdown = document.getElementById('dropdown');
+				let counts = { adults: 2, children: 0, babies: 0 };
+		
+				passengerInput.addEventListener('click', () => {
+					dropdown.classList.toggle('active'); // Toggle the active class on click
+				});
+		
+				function changeCount(type, delta) {
+					if (counts[type] + delta >= 0) {
+						counts[type] += delta;
+						document.getElementById(`${type}-count`).innerText = counts[type];
 					}
-
-					/* Booking Container */
-					#booking-container {
-						
-						background: url('./wp-content/uploads/2024/08/banner.svg') no-repeat center center/cover;
-						margin-top: 80px;
-						padding: 20px;
+				}
+		
+				function applySelection() {
+					passengerInput.value = `${counts.adults} adultes, ${counts.children} enfants, ${counts.babies} bébés`;
+					dropdown.classList.remove('active'); // Hide the dropdown after applying selection
+				}
+		
+				window.addEventListener('click', (e) => {
+					if (!e.target.closest('.passenger-select')) {
+						dropdown.classList.remove('active'); // Hide the dropdown if clicking outside
 					}
-
-					/* Title & Subtitle */
-					#booking-title {
-						font-size: 32px;
-						font-weight: bold;
-					}
-
-					#booking-subtitle {
-						font-size: 18px;
-						margin-bottom: 20px;
-					}
-
-					/* Booking Form */
-					#booking-form {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						gap: 10px;
-						background: white;
-						padding: 15px;
-						border-radius: 10px;
-						box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-					}
-
-					/* Input Fields */
-					input, select, button {
-						padding: 10px;
-						font-size: 16px;
-						border-radius: 5px;
-						border: 1px solid #ccc;
-					}
-
-					/* Button */
-					#find-tickets-btn {
-						background: #ff6600;
-						color: white;
-						border: none;
-						cursor: pointer;
-						transition: 0.3s;
-					}
-
-					#find-tickets-btn:hover {
-						background: #cc5200;
-					}
-
-					/* === Mobile Responsive Design === */
-					@media screen and (max-width: 768px) {
-						#booking-form {
-							flex-direction: column;
-							gap: 15px;
-							padding: 20px;
-							width: 90%;
-							margin: auto;
-						}
-
-						input, select, button {
-							width: 100%;
-						}
-
-						#find-tickets-btn {
-							font-size: 18px;
-							padding: 12px;
-						}
-					}
-
-
-				</style>
-			<!-- </div> -->
+				});
+			</script>
+		
+			<style>
+				/* General Styles */
+				body { text-align: center; color: #ff6600; padding: 0; margin: 0; }
+				.Chewy { font-family: Chewy; }
+				#booking-container {
+					background: url('./wp-content/uploads/2024/08/banner.svg') no-repeat center center/cover;
+					margin-top: 80px;
+					padding: 20px;
+				}
+				#booking-title { font-size: 32px; font-weight: bold; }
+				#booking-subtitle { font-size: 18px; margin-bottom: 20px; }
+				#booking-form {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					gap: 10px;
+					background: white;
+					padding: 15px;
+					border-radius: 10px;
+					box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+				}
+				input, select, button {
+					padding: 10px;
+					font-size: 16px;
+					border-radius: 5px;
+					border: 1px solid #ccc;
+				}
+				#find-tickets-btn {
+					background: #ff6600;
+					color: white;
+					border: none;
+					cursor: pointer;
+					transition: 0.3s;
+				}
+				#find-tickets-btn:hover { background: #cc5200; }
+		
+				/* Responsive */
+				@media screen and (max-width: 768px) {
+					#booking-form { flex-direction: column; gap: 15px; padding: 20px; width: 90%; margin: auto; }
+					input, select, button { width: 100%; }
+					#find-tickets-btn { font-size: 18px; padding: 12px; }
+				}
+			</style>
+		
 		</section>
+		
+		
 		<section
 			class="elementor-section elementor-top-section elementor-element elementor-element-f94959a elementor-section-boxed elementor-section-height-default elementor-section-height-default"
 			data-id="f94959a" data-element_type="section"
@@ -1261,7 +1345,7 @@
 													<div
 														class="ekit-heading elementskit-section-title-wraper text_left   ekit_heading_tablet-   ekit_heading_mobile-text_center">
 														<h2 class="ekit-heading--title elementskit-section-title ">About
-															<span><span>BERBER-TAXI </span></span></h2>
+															<span><span class="Chewy">BERBER-TAXI </span></span></h2>
 														<div
 															class="ekit_heading_separetor_wraper ekit_heading_elementskit-border-divider">
 															<div class="elementskit-border-divider"></div>
@@ -1300,7 +1384,7 @@
 													<div
 														class="ekit-heading elementskit-section-title-wraper text_center   ekit_heading_tablet-   ekit_heading_mobile-text_center">
 														<h2 class="ekit-heading--title elementskit-section-title ">Our
-															<span><span>Services</span></span></h2>
+															<span><span class="Chewy">Services</span></span></h2>
 														<div
 															class="ekit_heading_separetor_wraper ekit_heading_elementskit-border-divider">
 															<div class="elementskit-border-divider"></div>
@@ -1404,46 +1488,45 @@
 				</div>
 			</div>
 		</section>
-	</div>
-	<section class="elementor-section elementor-top-section elementor-element elementor-section-boxed elementor-section-height-default elementor-section-height-default client_jadir" data-id="client_section" data-element_type="section">
+	</div><section class="elementor-section elementor-top-section elementor-element elementor-section-boxed elementor-section-height-default elementor-section-height-default client_jadir" data-id="client_section" data-element_type="section">
 		<div class="elementor-container elementor-column-gap-default">
 			<div class="elementor-column elementor-col-100 elementor-top-column elementor-element" data-id="client_column" data-element_type="column">
 				<div class="elementor-widget-wrap elementor-element-populated">
 					<div class="elementor-element elementor-widget elementor-widget-heading" data-id="client_heading" data-element_type="widget" data-widget_type="heading.default">
 						<div class="elementor-widget-container">
-							<h2 class="elementor-heading-title elementor-size-default" style="text-align: center;">Our Happy Clients</h2>
+							<h2 class="elementor-heading-title elementor-size-default Chewy" style="text-align: center;">Our Happy Clients</h2>
 						</div>
 					</div>
 					<div class="elementor-element elementor-widget elementor-widget-image-gallery" data-id="client_gallery" data-element_type="widget" data-widget_type="image-gallery.default">
 						<div class="elementor-widget-container">
-							<div class="client-logos" style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+							<div class="client-logos" style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; padding-top: 20px;">
 								<!-- Client 1 -->
-								<div class="client-item" style="text-align: center; max-width: 200px;">
-									<img src="https://i.pinimg.com/736x/b6/b5/47/b6b547f999e883f9a58c1558da3ca327.jpg" alt="Client 1" style="max-width: 100%; height: auto;">
+								<div class="client-item" style="text-align: center; max-width: 200px; transition: transform 0.3s ease; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+									<img src="https://i.pinimg.com/736x/b6/b5/47/b6b547f999e883f9a58c1558da3ca327.jpg" alt="Client 1" style="max-width: 100%; height: auto; transition: transform 0.3s ease;">
 									<div class="stars" style="margin: 10px 0;">
 										⭐⭐⭐⭐⭐
 									</div>
 									<p style="font-style: italic;">"Amazing service and professional team!"</p>
 								</div>
 								<!-- Client 2 -->
-								<div class="client-item" style="text-align: center; max-width: 200px;">
-									<img src="wp-content/uploads/2024/08/client2.png" alt="Client 2" style="max-width: 100%; height: auto;">
+								<div class="client-item" style="text-align: center; max-width: 200px; transition: transform 0.3s ease; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+									<img src="https://i.pinimg.com/736x/fb/0e/b3/fb0eb3bf6fcfb14c3946bb0719bdf448.jpg" alt="Client 2" style="max-width: 100%; height: auto; transition: transform 0.3s ease;">
 									<div class="stars" style="margin: 10px 0;">
 										⭐⭐⭐⭐☆
 									</div>
 									<p style="font-style: italic;">"Great experience from start to finish."</p>
 								</div>
 								<!-- Client 3 -->
-								<div class="client-item" style="text-align: center; max-width: 200px;">
-									<img src="wp-content/uploads/2024/08/client3.png" alt="Client 3" style="max-width: 100%; height: auto;">
+								<div class="client-item" style="text-align: center; max-width: 200px; transition: transform 0.3s ease; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+									<img src="https://i.pinimg.com/736x/56/ea/41/56ea41fab52bb49cd06322c21d57f103.jpg" alt="Client 3" style="max-width: 100%; height: auto; transition: transform 0.3s ease;">
 									<div class="stars" style="margin: 10px 0;">
 										⭐⭐⭐⭐⭐
 									</div>
 									<p style="font-style: italic;">"Highly recommend their services!"</p>
 								</div>
 								<!-- Client 4 -->
-								<div class="client-item" style="text-align: center; max-width: 200px;">
-									<img src="wp-content/uploads/2024/08/client4.png" alt="Client 4" style="max-width: 100%; height: auto;">
+								<div class="client-item" style="text-align: center; max-width: 200px; transition: transform 0.3s ease; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+									<img src="https://i.pinimg.com/736x/73/3a/cb/733acbb0df790bb6f7a9e3f192a2076f.jpg" alt="Client 4" style="max-width: 100%; height: auto; transition: transform 0.3s ease;">
 									<div class="stars" style="margin: 10px 0;">
 										⭐⭐⭐⭐☆
 									</div>
@@ -1460,7 +1543,7 @@
 	<style>
 		.client_jadir {
 			padding: 80px 0;
-			background-color: #f5f5f5;
+			background-color: #f4f4f4;
 		}
 	
 		.client-logos .stars {
@@ -1473,7 +1556,31 @@
 			font-size: 14px;
 			margin-top: 5px;
 		}
+	
+		.client-item:hover {
+			transform: scale(1.1);
+			box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+		}
+	
+		.client-item img:hover {
+			transform: scale(1.05);
+		}
+	
+		.client-logos {
+			display: flex;
+			justify-content: center;
+			gap: 30px;
+			flex-wrap: wrap;
+			padding-top: 20px;
+		}
+	
+		@media screen and (max-width: 768px) {
+			.client-logos {
+				gap: 20px;
+			}
+		}
 	</style>
+	
 	
 	<style>
 		.footer_jadir{
@@ -1512,7 +1619,7 @@
 								<p style="color: var(--wp--preset--color--white);text-align: center;">Book now and make your dream getaway a reality with us!</p>
 							</div>
 						</div>
-						<div class="elementor-element elementor-element-3eafaf1 elementor-widget elementor-widget-elementskit-social-media"
+						<!-- <div class="elementor-element elementor-element-3eafaf1 elementor-widget elementor-widget-elementskit-social-media"
 							data-id="3eafaf1" data-element_type="widget"
 							data-widget_type="elementskit-social-media.default">
 							<div class="elementor-widget-container">
@@ -1535,7 +1642,7 @@
 									</ul>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
